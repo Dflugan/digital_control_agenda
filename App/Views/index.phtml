@@ -1,0 +1,52 @@
+<?php $this->render('common/header'); ?>
+<?php $this->render('cadastro/login'); ?>
+
+    <div class="page-header">
+        <div class="col-md-8">
+          <h1><strong>Agenda Web - Digital Control</strong></h1>
+        </div>
+    </div>
+
+    <div class="panel panel-default col-md-12">
+        <div class="panel-body">
+            <!--<a href="<?=url()->route('cadastro.index')?>" class="btn btn-success">
+                Cadastrar Pessoa
+            </a>-->
+            <div class="col-md-2 pull-right">
+              <div class="glyphicon glyphicon-user"></div>
+              <button class="btn btn-link" data-toggle="modal" data-target="#myModal">
+                  Login
+              </button>
+            </div>
+            <ul class="nav nav-pills col-md-8">
+              <li role="presentation" class="active"><a href="#">Home</a></li>
+              <li role="presentation"><a href="#">menu1</a></li>
+              <li role="presentation"><a href="#">menu2</a></li>
+            </ul>
+        </div>
+
+    </div>
+
+    <div class="panel panel-default col-md-12">
+        <div class="panel-body">
+
+            Selecione a pessoa:
+            <select id="pessoas">
+                <option value="0"> Selecione</option>
+                <?php foreach ($pessoas as $pessoa):?>
+                <option value="<?=$pessoa->id?>"><?=$pessoa->nome?></option>
+                <?php endforeach;?>
+            </select>
+
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('#pessoas').change(function(){
+                document.location.href = '<?=url()->route('eventos.index', ['pessoa' => '']);?>' + $(this).val();
+            });
+        });
+    </script>
+
+<?php $this->render('common/footer'); ?>
