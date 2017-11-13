@@ -24,7 +24,7 @@ class CadastroController extends Controller
 
         $pessoa = new Pessoa;
         $qtd = $pessoa->insert($dados);
-
+        
         if($qtd){
             session()->put('_sucesso', 'incluido com Sucesso!!');
             return redirect()->route('cadastro.index');

@@ -13,6 +13,7 @@ return [
      * 'nome' => ['controlador', 'método']
      */
 
+
     'index'     => ['index', 'index'],
 
     'eventos.index'  => ['eventos', 'index'],
@@ -28,7 +29,10 @@ return [
     'login.logar' => ['login', 'logar'],
 
     'login.index' => ['login', 'index'],
-    
+
     'login.logout' => ['login', 'logout'],
+    
+    'menu.index' => ['menu', 'index']
+
 
 ];

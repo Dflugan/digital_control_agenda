@@ -29,12 +29,6 @@
           </fieldset>
         </form>
       </div>
-        <?php if(session()->has('_sucesso')): ?>
-            <div class="alert alert-success" role="alert"><?=session()->getAndRemove('_sucesso');?></div>
-        <?php endif;  ?>
-        <?php if(session()->has('_erro')): ?>
-            <div class="alert alert-warning" role="alert"><?=session()->getAndRemove('_erro');?></div>
-        <?php endif;  ?>
 
       <!-- Modal footer -->
       <div class="modal-footer">

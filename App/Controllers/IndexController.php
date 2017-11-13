@@ -9,7 +9,7 @@ class IndexController extends Controller
     public function index()
     {
         $pessoas = (new Pessoa)->getAll();
-        return $this->render('index', [
+        return $this->render('login/index', [
             'pessoas' =>$pessoas
         ]);
     }

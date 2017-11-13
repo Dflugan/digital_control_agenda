@@ -5,6 +5,7 @@ use Foundation\Controller;
 use App\Models\Pessoa;
 use App\Models\Evento;
 use App\Models\PessoaEvento;
+use Foundation\Database\Db;
 
 class EventosController extends Controller
 {
@@ -91,5 +92,10 @@ class EventosController extends Controller
         return redirect()->route('eventos.index', [
             'pessoa' => $idPessoa
         ]);
+    }
+    
+    public function deletar()
+    {
+       $this->deletar();
     }
 }

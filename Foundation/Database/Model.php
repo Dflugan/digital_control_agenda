@@ -55,4 +55,9 @@ abstract class Model
     {
         return implode(',', $fields);
     }
+    
+    public function delete($where)
+    {
+        return $this->db->delete($this->getTableName(), $where);
+    }
 }
