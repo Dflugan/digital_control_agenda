@@ -1,5 +1,6 @@
 <?php
 // Caminho dos arquivos de visão
+//teste
 Container::set('app.view.path', __DIR__ . '/App/Views/');
 
 // URL da aplicação
