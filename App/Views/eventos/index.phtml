@@ -1,95 +1,92 @@
 <?php $this->render('common/header'); ?>
-<?php  
-if((!isset ($_SESSION['email_login']) == true) and (!isset ($_SESSION['pass_login']) == true))
-{
-	unset($_SESSION['email_login']);
-	unset($_SESSION['pass_login']);
-        session()->put('_erro', 'Erro Login');
-        return redirect()->route('index');
-	}
+<?php
+if ((!isset($_SESSION['email_login']) == true) and ( !isset($_SESSION['pass_login']) == true)) {
+    unset($_SESSION['email_login']);
+    unset($_SESSION['pass_login']);
+    session()->put('_erro', 'Erro Login');
+    return redirect()->route('index');
+}
 $logado = $_SESSION['email_login'];
 ?>
 
-    <div class="page-header">
-        <?php 
-        if(isset($pessoa->nome)){
-            echo "<h1>Eventos de <strong>$pessoa->nome  </strong></h1>";
-        }else{
-            echo 'teste';
-        }
-        ?>
-    </div>        
+<div class="page-header">
+    <?php
+    if (isset($pessoa->nome)) {
+        echo "<h1>Agenda de <strong>$pessoa->nome  </strong></h1>";
+    }
+    ?>
+</div>        
 
-    <div class="panel panel-default">
-        <div class="panel-body">
+<div class="panel panel-default">
+    <div class="panel-body">
 
-            <a href="<?=url()->route('eventos.cadastrar', ['pessoa' => $pessoa->id])?>" class="btn btn-success">
-                Novo Evento
-            </a>
-            <?php $this->render('common/logout'); ?><!--logout-->
+        <a href="<?= url()->route('eventos.cadastrar', ['pessoa' => $pessoa->id]) ?>" class="btn btn-success">
+            Nova Agenda
+        </a>
+        <?php $this->render('common/logout'); ?><!--logout-->
 
-        </div>
     </div>
+</div>
 
-    <?php if(session()->has('_sucesso')): ?>
-    <div class="alert alert-success" role="alert"><?=session()->getAndRemove('_sucesso');?></div>
-    <?php endif;  ?>
+<?php if (session()->has('_sucesso')): ?>
+    <div class="alert alert-success" role="alert"><?= session()->getAndRemove('_sucesso'); ?></div>
+<?php endif; ?>
 
-    <?php if(session()->has('_erro')): ?>
-        <div class="alert alert-warning" role="alert"><?=session()->getAndRemove('_erro');?></div>
-    <?php endif;  ?>
+<?php if (session()->has('_erro')): ?>
+    <div class="alert alert-danger" role="alert"><?= session()->getAndRemove('_erro'); ?></div>
+<?php endif; ?>
 
-    <div class="agenda">
-        <div class="table-responsive">
-            <table class="table table-condensed table-bordered">
-                <thead>
+<div class="agenda">
+    <div class="table-responsive">
+        <table class="table table-condensed table-bordered">
+            <thead>
                 <tr>
                     <th>Data</th>
                     <th>Hora</th>
                     <th>Evento</th>
                     <th>Ação</th>
                 </tr>
-                </thead>
-                <tbody>
+            </thead>
+            <tbody>
 
-                    
-                    <?php foreach($eventos as $evento):?>
+
+                <?php foreach ($eventos as $evento): ?>
                     <tr>
                         <td class="agenda-date" class="active" rowspan="1">
-                            <div class="dayofmonth"><?=dt($evento->data)->getDayOfMonth();?></div>
-                            <div class="dayofweek"><?=dt($evento->data)->getDayOfWeek();?></div>
-                            <div class="shortdate text-muted"><?=dt($evento->data)->getYearAndMonthSpelledOut();?></div>
+                            <div class="dayofmonth"><?= dt($evento->data)->getDayOfMonth(); ?></div>
+                            <div class="dayofweek"><?= dt($evento->data)->getDayOfWeek(); ?></div>
+                            <div class="shortdate text-muted"><?= dt($evento->data)->getYearAndMonthSpelledOut(); ?></div>
                         </td>
                         <td class="agenda-time">
-                            <?=$evento->hora_de;?>
+                            <?= $evento->hora_de; ?>
 
-                            <?php if($evento->hora_ate): ?>
-                                às <?=$evento->hora_ate;?>
+                            <?php if ($evento->hora_ate): ?>
+                                às <?= $evento->hora_ate; ?>
                             <?php endif; ?>
                         </td>
                         <td class="agenda-events">
-                            <?=$evento->descricao;?>
+                            <?= $evento->descricao; ?>
                         </td>
                         <td class="agenda-events">
-                            <a href="<?=url()->route('eventos.cadastrar', ['evento' => $evento->id, 'pessoa' => $pessoa->id]);?>">
+                            <a href="<?= url()->route('eventos.cadastrar', ['evento' => $evento->id, 'pessoa' => $pessoa->id]); ?>">
                                 Editar
                             </a>
-                            
-                            <a href="<?=url()->route('eventos.deletar', ['evento' => $evento->id, 'pessoa' => $pessoa->id]);?>">
+
+                            <a href="<?= url()->route('eventos.deletar', ['evento' => $evento->id, 'pessoa' => $pessoa->id]); ?>">
                                 <span class="glyphicon" style="color: #f1220d">&#xe014;</span>
                             </a>
                         </td>
                     </tr>
 
-                    <?php endforeach; ?>
+                <?php endforeach; ?>
 
-                </tbody>
-            </table>
-        </div>
-
-        <a class="btn btn-info" href="<?=url()->route('menu.index');?>">Voltar</a>
-
+            </tbody>
+        </table>
     </div>
+
+    <a class="btn btn-info" href="<?= url()->route('pessoa.index'); ?>">Voltar</a>
+
+</div>
 
 <?php $this->render('common/footer'); ?>
 

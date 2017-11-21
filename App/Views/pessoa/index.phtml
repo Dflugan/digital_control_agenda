@@ -1,17 +1,16 @@
-<?php 
+<?php
 $this->render('common/header');
-if((!isset ($_SESSION['email_login']) == true) and (!isset ($_SESSION['pass_login']) == true))
-{
-	unset($_SESSION['email_login']);
-	unset($_SESSION['pass_login']);
-        session()->put('_erro', 'Erro Login');
-        return redirect()->route('index');
-	}
+if ((!isset($_SESSION['email_login']) == true) and ( !isset($_SESSION['pass_login']) == true)) {
+    unset($_SESSION['email_login']);
+    unset($_SESSION['pass_login']);
+    session()->put('_erro', 'Erro Login');
+    return redirect()->route('index');
+}
 
 $logado = $_SESSION['email_login'];
 ?>
 <div id="main" class="container-fluid">
-    
+
     <div id="top" class="row">
         <div class="col-md-3">
             <h2 class="page-header">Funcionários</h2>
@@ -26,48 +25,59 @@ $logado = $_SESSION['email_login'];
                 </span>
             </div>
         </div>
+        
         <div class="col-md-3">
-            <a href="<?= url()->route('cadastro.index');?>" class="btn btn-primary pull-right h2">Novo Funcionário</a>
+            <a href="<?= url()->route('cadastro.index'); ?>" class="btn btn-primary pull-right h2">Novo Funcionário</a>
+        </div>
+        <div class="col-md-6 text-center">
+            <a href="<?= url()->route('menu.index'); ?>" class="btn btn-primary pull-right h2">Home</a>
+            
         </div>
     </div> <!-- /#top -->
-    
-    <?php if(session()->has('_sucesso')):?>
+    <!--mensagem de erro DELETAR!!!-->
+    <?php $this->render('common/logout'); ?><!--logout-->
+    <?php if(session()->has('_erro')): ?>
+        <div class="alert alert-danger" role="alert"><?=session()->getAndRemove('_erro');?></div>
+    <?php endif;  ?>
+        
+    <?php if (session()->has('_sucesso')): ?>
         <div class="alert alert-success" role="alert">
-            <?= session()->getAndRemove('_sucesso');?>
+            <?= session()->getAndRemove('_sucesso'); ?>
         </div>
-    <?php endif;?>
+    <?php endif; ?>
+        
     <hr />
     
     <div id="list" class="row">
         <div class="table table-responsive col-md-12">            
             <table class="table table-striped" cellspacing="0" cellpadding="0">
                 <thead>
-                <tr>
-                    <th>Id</th>
-                    <th>Nome</th>
-                    <th>Telefone</th>
-                    <th>Email</th>
-                    <th class="actions">Ações</th>
-                </tr>
+                    <tr>
+                        <th>Id</th>
+                        <th>Nome</th>
+                        <th>Telefone</th>
+                        <th>Email</th>
+                        <th class="actions">Ações</th>
+                    </tr>
                 </thead>
                 <tbody>
-                    <?php foreach ($pessoas as $funconarios):?>
-                    <tr>
-                        <td><?=$funconarios->id;?></td>
-                        <td><?=$funconarios->nome;?></td>
-                        <td><?=$funconarios->fone;?></td>
-                        <td><?=$funconarios->email;?></td>
-                        <td class="actions">
-                            <a href="#" class="btn btn-success btn-xs">Visualizar</a> 
-                            <a href="#" class="btn btn-warning btn-xs">Editar</a>
-                            <a href="#" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#delete-modal">Excluir</a>
-                        </td>
-                    </tr>
-                    <?php endforeach;?>
+                    <?php foreach ($pessoas as $funcionarios): ?>
+                        <tr>
+                            <td><?= $funcionarios->id; ?></td>
+                            <td><?= $funcionarios->nome; ?></td>
+                            <td><?= $funcionarios->fone; ?></td>
+                            <td><?= $funcionarios->email; ?></td>
+                            <td class="actions">
+                                <a href="<?=url()->route('eventos.index', ['pessoa' =>$funcionarios->id]);?>" class="btn btn-success btn-xs">Agenda</a> 
+                                <a href="<?=url()->route('pessoa.cadastrar', ['pessoa' =>$funcionarios->id]);?>" class="btn btn-warning btn-xs">Editar</a>
+                                <a href="<?= url()->route('pessoa.deletar', ['pessoa' => $funcionarios->id]); ?>" class="btn btn-danger btn-xs">Excluir</a>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
                 </tbody>
             </table>
         </div>
-        
+
     </div> <!-- /#list -->
 
     <div id="bottom" class="row">
@@ -77,28 +87,13 @@ $logado = $_SESSION['email_login'];
                 <li class="disabled"><a>1</a></li>
                 <li><a href="#">2</a></li>
                 <li><a href="#">3</a></li>
-                
+
                 <li class="next"><a href="#" rel="next">Próximo &gt;</a></li>
             </ul><!-- /.pagination -->
         </div>
     </div> <!-- /#bottom -->
 </div>
 
-<!--MODAL EXCLUSÃO-->
-<div class="modal fade" id="delete-modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Fechar"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="modalLabel">FUNCIONÁRIO < nome > </h4>
-            </div>
-            <div class="modal-body">Deseja realmente excluir este item? </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary">Sim</button>
-                <button type="button" class="btn btn-default" data-dismiss="modal">N&atilde;o</button>
-            </div>
-        </div>
-    </div>
-</div><!-- /. MODAL EXCLUSÃO -->
+
 
 <?php $this->render('common/footer'); ?>

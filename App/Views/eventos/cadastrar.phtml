@@ -14,7 +14,7 @@ $logado = $_SESSION['email_login'];
 <?php if(false): ?>
     <h1><strong><?=$pessoa->nome?></strong> - Editar evento: <?=$evento->descricao?></h1>
 <?php else: ?>
-    <h1>Novo evento para <strong><?=$pessoa->nome?></strong></h1>
+    <h1>Editar evento para <strong><?=$pessoa->nome?></strong></h1>
 <?php endif; ?>
 </div>
 
@@ -79,7 +79,7 @@ $logado = $_SESSION['email_login'];
 <?php endif;  ?>
 
 <?php if(session()->has('_erro')): ?>
-    <div class="alert alert-warning" role="alert"><?=session()->getAndRemove('_erro');?></div>
+    <div class="alert alert-danger" role="alert"><?=session()->getAndRemove('_erro');?></div>
 <?php endif;  ?>
 
 

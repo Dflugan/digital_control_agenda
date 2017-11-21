@@ -1,61 +1,101 @@
 <?php $this->render('common/header'); ?>
-<?php $this->render('cadastro/login'); ?>
-
 <?php
-if((!isset ($_SESSION['email_login']) == true) and (!isset ($_SESSION['pass_login']) == true))
-{
-	unset($_SESSION['email_login']);
-	unset($_SESSION['pass_login']);
-        session()->put('_erro', 'Erro Login');
-        return redirect()->route('index');
-	}
-
+if ((!isset($_SESSION['email_login']) == true) and ( !isset($_SESSION['pass_login']) == true)) {
+    unset($_SESSION['email_login']);
+    unset($_SESSION['pass_login']);
+    session()->put('_erro', 'Erro Login');
+    return redirect()->route('index');
+}
 $logado = $_SESSION['email_login'];
 ?>
 
-    <div class="page-header">
-        <div class="col-md-8">
-          <h1><strong>Agenda Web - Digital Control</strong></h1>
-        </div>
+<div class="page-header">
+    <?php if (session()->has('_sucesso')): ?>
+        <div class="well" role="alert"><?= session()->getAndRemove('_sucesso'); ?></div>
+    <?php endif; ?>
+    <div class="col-md-8">
+        <h1><strong>Agenda Web - Digital Control</strong></h1>
     </div>
+</div>       
 
-    <div class="panel panel-default col-md-12">
-        <div class="panel-body">
-            <a href="<?=url()->route('cadastro.index')?>" class="btn btn-success">
-                Cadastrar Pessoa
-            </a>
+<div class="panel panel-default">
+    <div class="panel-body">
 
-            <?php $this->render('common/logout'); ?><!--logout-->
-            
-            <ul class="nav nav-pills col-md-8">
-              <li role="presentation" class="active"><a href="#">Home</a></li>
-              <li role="presentation"><a href="#">menu1</a></li>
-              <li role="presentation"><a href="#">menu2</a></li>
-            </ul>
-        </div>
+        <?php $this->render('common/logout'); ?><!--logout-->
 
     </div>
+    <a href="<?= url()->route('pessoa.index') ?>" class="btn btn-primary">
+        Funcionario
+    </a>
+    
+    <a href="<?= url()->route('cadastro.index') ?>" class="btn btn-success">
+        Cadastrar
+    </a>
+    <a href="<?= url()->route('eventos.cadastrar', ['pessoa' => $pessoa->id]) ?>" class="btn btn-info">
+        Opção
+    </a>
+    
+    <a href="<?= url()->route('eventos.cadastrar', ['pessoa' => $pessoa->id]) ?>" class="btn btn-warning">
+        Opção
+    </a>
+    
+</div>
 
-    <div class="panel panel-default col-md-12">
-        <div class="panel-body">
+<?php if (session()->has('_sucesso')): ?>
+    <div class="alert alert-success" role="alert"><?= session()->getAndRemove('_sucesso'); ?></div>
+<?php endif; ?>
 
-            Selecione a pessoa:
-            <select id="pessoas">
-                <option value="0"> Selecione</option>
-                <?php foreach ($pessoas as $pessoa):?>
-                <option value="<?=$pessoa->id?>"><?=$pessoa->nome?></option>
-                <?php endforeach;?>
-            </select>
+<?php if (session()->has('_erro')): ?>
+    <div class="alert alert-danger" role="alert"><?= session()->getAndRemove('_erro'); ?></div>
+<?php endif; ?>
 
-        </div>
+<div class="agenda">
+    <div class="table-responsive">
+        <table class="table table-condensed table-bordered">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Data</th>
+                    <th>Hora</th>
+                    <th>Evento</th>
+                </tr>
+            </thead>
+            <tbody>
+
+
+                <?php foreach ($eventos as $evento): ?>
+                    <tr>
+                        <?php foreach ($pessoas as $pessoa):?>
+                        <td class="agenda-events">
+                            <?= $pessoa->nome; ?>
+                        </td>
+                        
+                        <td class="agenda-date" class="active" rowspan="1">
+                            <div class="dayofmonth"><?= dt($evento->data)->getDayOfMonth(); ?></div>
+                            <div class="dayofweek"><?= dt($evento->data)->getDayOfWeek(); ?></div>
+                            <div class="shortdate text-muted"><?= dt($evento->data)->getYearAndMonthSpelledOut(); ?></div>
+                        </td>
+                        <td class="agenda-time">
+                            <?= $evento->hora_de; ?>
+
+                            <?php if ($evento->hora_ate): ?>
+                                às <?= $evento->hora_ate; ?>
+                            <?php endif; ?>
+                        </td>
+                        <td class="agenda-events">
+                            <?= $evento->descricao; ?>
+                        </td>
+                        
+                    </tr>
+                    <?php endforeach;?>
+                <?php endforeach; ?>
+
+            </tbody>
+        </table>
     </div>
 
-    <script type="text/javascript">
-        $(document).ready(function(){
-            $('#pessoas').change(function(){
-                document.location.href = '<?=url()->route('eventos.index', ['pessoa' => '']);?>' + $(this).val();
-            });
-        });
-    </script>
+
+</div>
 
 <?php $this->render('common/footer'); ?>
+

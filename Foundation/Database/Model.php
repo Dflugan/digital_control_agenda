@@ -22,7 +22,7 @@ abstract class Model
         $fields = $this->parseFields($fields);
 
         $query = "SELECT $fields FROM {$this->getTableName()} WHERE id = :id";
-
+        
         $where = [
             'id' => $id
         ];

@@ -38,7 +38,15 @@ return [
     
     'eventos.deletar' => ['eventos', 'deletar'],
     
-    'pessoa.index' => ['pessoa', 'index']
+    'pessoa.index' => ['pessoa', 'index'],
+    
+    'pessoa.deletar' => ['pessoa', 'deletar'],
+    
+    'pessoa.cadastrar' => ['pessoa', 'cadastrar'],
+    
+    'pessoa.editar' => ['pessoa', 'editar'],
+    
+    'pessoa.salvar' => ['pessoa', 'salvar']
 
 
 ];

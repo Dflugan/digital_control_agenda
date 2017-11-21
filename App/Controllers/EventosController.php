@@ -70,7 +70,7 @@ class EventosController extends Controller
         if($idEvento) {
             $this->evento->updateById($idEvento, $fields);
 
-            session()->put('_sucesso', 'O evento foi atualizado com sucesso');
+            session()->put('_sucesso', 'O Agenda foi atualizada com sucesso');
 
             return redirect()->route('eventos.index', [
                 'evento' => $idEvento,
@@ -87,7 +87,7 @@ class EventosController extends Controller
             'evento' => $idEventoCadastrado
         ]);
 
-        session()->put('_sucesso', 'Evento cadastrado com sucesso!');
+        session()->put('_sucesso', 'Agenda cadastrado com sucesso!');
 
         return redirect()->route('eventos.index', [
             'pessoa' => $idPessoa
