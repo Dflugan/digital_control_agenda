@@ -7,12 +7,17 @@ if((!isset ($_SESSION['email_login']) == true) and (!isset ($_SESSION['pass_logi
         session()->put('_erro', 'Erro Login');
         return redirect()->route('index');
 	}
-
 $logado = $_SESSION['email_login'];
 ?>
 
     <div class="page-header">
-        <h1>Eventos de <strong><?=$pessoa->nome?></strong></h1>
+        <?php 
+        if(isset($pessoa->nome)){
+            echo "<h1>Eventos de <strong>$pessoa->nome  </strong></h1>";
+        }else{
+            echo 'teste';
+        }
+        ?>
     </div>        
 
     <div class="panel panel-default">
@@ -70,7 +75,7 @@ $logado = $_SESSION['email_login'];
                                 Editar
                             </a>
                             
-                            <a href="<?=url()->route('eventos.cadastrar', ['evento' => $evento->id, 'pessoa' => $pessoa->id]);?>">
+                            <a href="<?=url()->route('eventos.deletar', ['evento' => $evento->id, 'pessoa' => $pessoa->id]);?>">
                                 <span class="glyphicon" style="color: #f1220d">&#xe014;</span>
                             </a>
                         </td>

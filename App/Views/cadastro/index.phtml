@@ -11,7 +11,7 @@ $logado = $_SESSION['email_login'];
 ?>
 
 <div class="page-header">
-    <h1><strong>Cadastro de Pessoa</strong></h1>
+    <h1><strong>Cadastro de Funcionário</strong></h1>
 </div>
 
 <?php $this->render('common/logout'); ?><!--logout-->
@@ -59,7 +59,7 @@ $logado = $_SESSION['email_login'];
                 <?php endif; ?>
             </fieldset>
         </form>
-        <a class="btn btn-info" href="<?= url()->route('menu.index'); ?>">Voltar</a>
+        <a class="btn btn-info" href="<?= url()->route('pessoa.index'); ?>">Voltar</a>
     </div>
 </div>
 <?php $this->render('common/footer'); ?>

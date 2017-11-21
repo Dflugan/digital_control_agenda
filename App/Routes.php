@@ -32,7 +32,13 @@ return [
 
     'login.logout' => ['login', 'logout'],
     
-    'menu.index' => ['menu', 'index']
+    'menu.index' => ['menu', 'index'],
+    
+    'menu.index' => ['menu', 'index'],
+    
+    'eventos.deletar' => ['eventos', 'deletar'],
+    
+    'pessoa.index' => ['pessoa', 'index']
 
 
 ];

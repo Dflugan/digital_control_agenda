@@ -96,6 +96,19 @@ class EventosController extends Controller
     
     public function deletar()
     {
-       $this->deletar();
+        $idEvento = input()->get('evento', false);
+        $id = "evento={$idEvento}";
+        
+        $idPessoa= input()->get('pessoa');
+        
+        
+        $deletar = $this->pessoaEvento->delete($id);
+        if($deletar){
+            return redirect()->route('eventos.index', [
+            'pessoa' => $idPessoa
+        ]);
+        }else{
+            session()->put('_erro', 'Erro ao deletar');
+        }
     }
 }
