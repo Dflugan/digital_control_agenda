@@ -1,13 +1,27 @@
 <?php $this->render('common/header'); ?>
-<?php
-if ((!isset($_SESSION['email_login']) == true) and ( !isset($_SESSION['pass_login']) == true)) {
-    unset($_SESSION['email_login']);
-    unset($_SESSION['pass_login']);
-    session()->put('_erro', 'Erro Login');
-    return redirect()->route('index');
-}
-$logado = $_SESSION['email_login'];
-?>
+<!--<?php
+//if ((!isset($_SESSION['email_login']) == true) and ( !isset($_SESSION['pass_login']) == true)) {
+//    unset($_SESSION['email_login']);
+//    unset($_SESSION['pass_login']);
+//    session()->put('_erro', 'Erro Login');
+//    return redirect()->route('index');
+//}
+//$logado = $_SESSION['email_login'];
+//?>-->
+<div id="main" class="container-fluid text-center">
+    <div id="top" class="row">
+        <div class="col-md-6 text-center">
+            <div class="input-group h2">
+                <input name="data[search]" class="form-control" id="search" type="text" placeholder="Pesquisa de Itens">
+                <span class="input-group-btn">
+                    <button type="submit" class="btn btn-primary">
+                        <span class="glyphicon glyphicon-search"></span>
+                    </button>
+                </span>
+            </div>
+        </div>
+    </div> <!-- /#top -->
+</div>
 
 <div class="page-header">
     <?php if (session()->has('_sucesso')): ?>

@@ -50,14 +50,14 @@ class Db extends PDO
     public function insert($table, $data)
     {
         // Ordena
-        ksort($data);
+        //ksort($data);
 
         // Campos e valores
-        $camposNomes = implode('`, `', array_keys($data));
-        $camposValores = ':' . implode(', :', array_keys($data));
-
+        $camposNomes = implode(', ', array_keys($data));
+        $camposValores =  implode('\', \'', array_values($data));
         // Prepara a Query
-        $sql = sprintf('INSERT INTO %s (`%s`) VALUES (%s)', $table, $camposNomes, $camposValores);
+        $sql = sprintf("INSERT INTO %s (%s) VALUES ('%s')", $table, $camposNomes, $camposValores);
+        
         $sth = $this->prepare($sql);
 
         // Define os dados do where, se existirem.

@@ -16,7 +16,7 @@ class LoginController extends Controller
     $password = md5(input()->get('password'));
     $dados = [
     'email' => input()->get('email'),
-     'password' => $password
+     'senha' => $password
     ];
     $login = new Login;
     $login->getLogin($dados['email'], $password);

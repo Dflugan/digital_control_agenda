@@ -1,0 +1,13 @@
+<?php
+
+function get_endereco($cep){
+    $cep = preg_replace("/[^0-9]/", "", $cep);
+    $url = "http://viacep.com.br/ws/$cep/xml/";
+    
+    $Xml = simplexml_load_file($url);
+    return $Xml;
+    
+}
+$cep = "06380-170";
+$endereco = (get_endereco($cep));
+print_r($endereco);

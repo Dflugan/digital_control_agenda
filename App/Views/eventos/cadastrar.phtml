@@ -1,14 +1,4 @@
 <?php $this->render('common/header');?>
-<?php  
-if((!isset ($_SESSION['email_login']) == true) and (!isset ($_SESSION['pass_login']) == true))
-{
-	unset($_SESSION['email_login']);
-	unset($_SESSION['pass_login']);
-        session()->put('_erro', 'Erro Login');
-        return redirect()->route('index');
-	}
-$logado = $_SESSION['email_login'];
-?>
 
 <div class="page-header">
 <?php if(false): ?>

@@ -10,7 +10,7 @@ Container::set('app.url', 'http://localhost:8000');
 Container::set('app.db.config', [
     'sgdb' => 'mysql',
     'host' => '127.0.0.1',
-    'database' => 'agenda',
+    'database' => 'imoveis',
     'user' => 'root',
     'password' => ''
 ]);

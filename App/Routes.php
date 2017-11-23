@@ -15,6 +15,8 @@ return [
 
 
     'index'     => ['index', 'index'],
+    
+    'index.teste'     => ['index', 'teste'],
 
     'eventos.index'  => ['eventos', 'index'],
 
@@ -25,6 +27,10 @@ return [
     'cadastro.index' => ['cadastro', 'index'],
 
     'cadastro.salvar' => ['cadastro', 'salvar'],
+    
+    'cadastro.login' => ['cadastro', 'login'],
+    
+    'cadastro.cadastroImoveis' => ['cadastro', 'cadastroImoveis'],
 
     'login.logar' => ['login', 'logar'],
 

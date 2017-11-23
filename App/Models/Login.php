@@ -7,8 +7,7 @@ use Foundation\Database\Model;
 class Login extends Model {
 
     public function getLogin($email_login, $pass_login) {
-
-        $query = "SELECT * FROM pessoa WHERE email='{$email_login}' AND password='{$pass_login}' ";
+        $query = "SELECT * FROM login WHERE email='{$email_login}' AND senha='{$pass_login}' ";
 
         $return = $this->db->select($query);
 
@@ -18,7 +17,7 @@ class Login extends Model {
             $_SESSION['pass_login'] = $pass_login;
             
             foreach ($return as $value) {
-                session()->put('_sucesso', "Bem vindo . $value->nome");
+                session()->put('_sucesso', "Bem vindo!!! Você esta logado com Email: <strong>$email_login</strong>");
                 return redirect()->route('menu.index');
             }
         } else {
