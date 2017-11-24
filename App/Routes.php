@@ -17,6 +17,10 @@ return [
     'index'     => ['index', 'index'],
     
     'index.teste'     => ['index', 'teste'],
+    
+    'busca.index'     => ['busca', 'index'],
+    
+    'busca.search'     => ['busca', 'search'],
 
     'eventos.index'  => ['eventos', 'index'],
 
@@ -58,7 +62,9 @@ return [
     
     'pessoa.editar' => ['pessoa', 'editar'],
     
-    'pessoa.salvar' => ['pessoa', 'salvar']
+    'pessoa.editar' => ['pessoa', 'editar'],
+    
+    'search.index' => ['search', 'index']
 
 
 ];

@@ -1,32 +1,20 @@
 <?php $this->render('common/header'); ?>
 <?php $this->render('common/session'); ?>
+<head><title>Search - Moveis</title>
+       
+            
+       
 
-<div id="main" class="container-fluid">
-    <div id="top" class="row">
-        <div class="col-md-3">
-            <?php $this->render('common/login'); ?><!--navbar-->
-        </div>
-        <div class="col-md-6">
-            <?php $this->render('common/search'); ?>
-        </div>
 
-    </div> <!-- /#top -->
-
+<div class="page-header">
+    <?php $this->render('common/login'); ?><!--logo-->
+    <?php $this->render('common/search'); ?>
     <?php $this->render('common/logout'); ?><!--logout-->
-    <?php if (session()->has('_erro')): ?>
-        <div class="alert alert-danger" role="alert"><?= session()->getAndRemove('_erro'); ?></div>
-    <?php endif; ?>
+</div>
 
-    <?php if (session()->has('_sucesso')): ?>
-        <div class="alert alert-success" role="alert"><?= session()->getAndRemove('_sucesso'); ?>
-        </div>
-    <?php endif; ?>
-
-    <hr />
+<div class="container">
     <?php $this->render('common/navbar'); ?><!--navbar-->
-
-    <div class="row">
-
+     <div class="row">
         <?php foreach ($imoveis as $dados): ?>
             <div class="col-sm-6 col-md-4">
 
@@ -58,6 +46,5 @@
                 </div>
             </div><?php endforeach; ?>
     </div>
-
-
-    <?php $this->render('common/footer'); ?>
+    
+    <?php $this->render('common/footer'); ?><!--footer-->
