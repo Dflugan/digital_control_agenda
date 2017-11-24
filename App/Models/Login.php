@@ -17,7 +17,7 @@ class Login extends Model {
             $_SESSION['pass_login'] = $pass_login;
             
             foreach ($return as $value) {
-                session()->put('_sucesso', "Bem vindo!!! Você esta logado com Email: <strong>$email_login</strong>");
+                session()->put('_sucesso', "Bem vindo!!! Email: <strong>$email_login</strong>");
                 return redirect()->route('menu.index');
             }
         } else {

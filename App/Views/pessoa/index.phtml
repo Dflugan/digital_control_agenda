@@ -1,12 +1,14 @@
 <?php
 $this->render('common/header');
 
+
 ?>
+
 <div id="main" class="container-fluid">
 
     <div id="top" class="row">
         <div class="col-md-3">
-            <h2 class="page-header">Funcionários</h2>
+            <?php $this->render('common/login'); ?><!--navbar-->
         </div>
         <div class="col-md-6">
             <div class="input-group h2">
@@ -19,13 +21,6 @@ $this->render('common/header');
             </div>
         </div>
         
-        <div class="col-md-3">
-            <a href="<?= url()->route('cadastro.index'); ?>" class="btn btn-primary pull-right h2">Novo Funcionário</a>
-        </div>
-        <div class="col-md-6 text-center">
-            <a href="<?= url()->route('menu.index'); ?>" class="btn btn-primary pull-right h2">Home</a>
-            
-        </div>
     </div> <!-- /#top -->
     <!--mensagem de erro DELETAR!!!-->
     <?php $this->render('common/logout'); ?><!--logout-->
@@ -39,54 +34,36 @@ $this->render('common/header');
         </div>
     <?php endif; ?>
         
-    <hr />
+    <hr /><?php $this->render('common/navbar'); ?><!--navbar-->
     
-    <div id="list" class="row">
-        <div class="table table-responsive col-md-12">            
-            <table class="table table-striped" cellspacing="0" cellpadding="0">
-                <thead>
-                    <tr>
-                        <th>Id</th>
-                        <th>Nome</th>
-                        <th>Telefone</th>
-                        <th>Email</th>
-                        <th class="actions">Ações</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php foreach ($pessoas as $funcionarios): ?>
-                        <tr>
-                            <td><?= $funcionarios->id; ?></td>
-                            <td><?= $funcionarios->nome; ?></td>
-                            <td><?= $funcionarios->fone; ?></td>
-                            <td><?= $funcionarios->email; ?></td>
-                            <td class="actions">
-                                <a href="<?=url()->route('eventos.index', ['pessoa' =>$funcionarios->id]);?>" class="btn btn-success btn-xs">Agenda</a> 
-                                <a href="<?=url()->route('pessoa.cadastrar', ['pessoa' =>$funcionarios->id]);?>" class="btn btn-warning btn-xs">Editar</a>
-                                <a href="<?= url()->route('pessoa.deletar', ['pessoa' => $funcionarios->id]); ?>" class="btn btn-danger btn-xs">Excluir</a>
-                            </td>
-                        </tr>
-                    <?php endforeach; ?>
-                </tbody>
-            </table>
-        </div>
-
-    </div> <!-- /#list -->
-
-    <div id="bottom" class="row">
-        <div class="col-md-12">
-            <ul class="pagination">
-                <li class="disabled"><a>&lt; Anterior</a></li>
-                <li class="disabled"><a>1</a></li>
-                <li><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-
-                <li class="next"><a href="#" rel="next">Próximo &gt;</a></li>
-            </ul><!-- /.pagination -->
-        </div>
-    </div> <!-- /#bottom -->
+    <div class="row">
+  <div class="col-sm-6 col-md-4">
+    <div class="thumbnail">
+        <img src="http://www.austenmorris.com/wp-content/uploads/2017/06/Tech-Sector-V2.jpg" alt="..." width="90%">
+      <div class="caption">
+          <h3>Titulo</h3>
+        <address>
+            <strong>Cordigo: </strong>0001 <strong>Tipo: </strong>Apartamento<br><br>
+            <div class="text-primary">Endereço</div>
+            <strong>Rua: </strong>Tomaz Lupo, <strong>N°</strong>251<br>
+            <strong>Bairro: </strong>Vila Gomes<br>
+            <strong>Cidade: </strong>São Paulo<br>
+            <strong>Estado: </strong>SP<br>
+            <strong>Complemento: </strong>Casa Terrea<br>
+            <strong>Status: </strong>Venda<br>
+            <strong>Valor: </strong>R$ 5000<br>
+            <strong>Area: </strong>100 <small>Mt²</small><br>
+            <strong>Quarto: </strong>1<br>
+            <strong>Suite: </strong>1<br>
+            <strong>Banheiro: </strong>1<br>
+            <strong>Sala: </strong>1<br>
+            <strong>Garagem: </strong>1<br>
+        </address>
+        <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+      </div>
+    </div>
+  </div>
 </div>
-
 
 
 <?php $this->render('common/footer'); ?>

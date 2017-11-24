@@ -28,6 +28,12 @@ return [
 
     'cadastro.salvar' => ['cadastro', 'salvar'],
     
+    'cadastro.delete' => ['cadastro', 'delete'],
+    
+    'cadastro.editar' => ['cadastro', 'editar'],
+    
+    'cadastro.editarCadastro' => ['cadastro', 'editarCadastro'],
+    
     'cadastro.login' => ['cadastro', 'login'],
     
     'cadastro.cadastroImoveis' => ['cadastro', 'cadastroImoveis'],

@@ -3,17 +3,16 @@
 namespace App\Controllers;
 
 use Foundation\Controller;
-use App\Models\Pessoa;
+use App\Models\Imoveis;
 use App\Models\Evento;
 
 class MenuController extends Controller {
 
     public function index() {
-        $pessoas = (new Pessoa)->getAll();        
+        $Imoveis = (new Imoveis)->getAll();        
         $evento = (new Evento)->getAll();
         $this->render('index/index', [
-            'pessoas' => $pessoas,
-            'eventos' => $evento
+            'imoveis' => $Imoveis
         ]);
     }
 

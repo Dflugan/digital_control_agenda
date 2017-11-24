@@ -1,16 +1,16 @@
-<?php $this->render('common/header'); ?>
-<!--<?php
-//if ((!isset($_SESSION['email_login']) == true) and ( !isset($_SESSION['pass_login']) == true)) {
-//    unset($_SESSION['email_login']);
-//    unset($_SESSION['pass_login']);
-//    session()->put('_erro', 'Erro Login');
-//    return redirect()->route('index');
-//}
-//$logado = $_SESSION['email_login'];
-//?>-->
-<div id="main" class="container-fluid text-center">
+<?php
+$this->render('common/header');
+
+
+?>
+
+<div id="main" class="container-fluid">
+
     <div id="top" class="row">
-        <div class="col-md-6 text-center">
+        <div class="col-md-3">
+            <?php $this->render('common/login'); ?><!--navbar-->
+        </div>
+        <div class="col-md-6">
             <div class="input-group h2">
                 <input name="data[search]" class="form-control" id="search" type="text" placeholder="Pesquisa de Itens">
                 <span class="input-group-btn">
@@ -20,96 +20,54 @@
                 </span>
             </div>
         </div>
+        
     </div> <!-- /#top -->
-</div>
-
-<div class="page-header">
+    
+    <?php $this->render('common/logout'); ?><!--logout-->
+    <?php if(session()->has('_erro')): ?>
+        <div class="alert alert-danger" role="alert"><?=session()->getAndRemove('_erro');?></div>
+    <?php endif;  ?>
+        
     <?php if (session()->has('_sucesso')): ?>
-        <div class="well" role="alert"><?= session()->getAndRemove('_sucesso'); ?></div>
+        <div class="alert alert-success" role="alert"><?= session()->getAndRemove('_sucesso'); ?>
+        </div>
     <?php endif; ?>
-    <div class="col-md-8">
-        <h1><strong>Agenda Web - Digital Control</strong></h1>
+        
+    <hr /><?php $this->render('common/navbar'); ?><!--navbar-->
+    
+    <div class="row">
+  
+        <?php foreach ($imoveis as $dados):?>
+    <div class="col-sm-6 col-md-4">
+      
+    <div class="thumbnail">
+        <img src="../imagens/produtos/<?=$dados->id?>/<?=$dados->imagem?>" alt="..." width="90%"  style=" height: 300px;">
+      <div class="caption">
+          <h3>Titulo:<strong><?=$dados->titulo?></strong></h3>
+        <address>
+            <h4><strong>Cordigo: </strong><?=$dados->codigo?> <strong>Tipo: </strong><?=$dados->tipo?><br></h4>
+  
+            <strong>Endereço: </strong><?=$dados->rua?> N°</strong><?=$dados->numero?><br>
+            <strong>Bairro: </strong><?=$dados->bairro?><br>
+            <strong>Cidade: </strong><?=$dados->cidade?>
+            <strong>Estado: </strong><?=$dados->estado?><br>
+            <strong>Complemento: </strong><?=$dados->complemento?><br>
+            <strong>Status: </strong><?=$dados->forma?>
+            <strong>Valor: </strong><?=$dados->preco?><br>
+            <strong>Area: </strong><?=$dados->area?> <small>Mt²</small>&nbsp;
+            <strong>Quarto: </strong><?=$dados->quarto?>&nbsp;
+            <strong>Suite: </strong><?=$dados->suite?><br>
+            <strong>Banheiro: </strong><?=$dados->banheiro?>&nbsp;
+            <strong>Sala: </strong><?=$dados->sala?>&nbsp;
+            <strong>Garagem: </strong><?=$dados->garagem?><br>
+        </address>
+          
+        <p><a href="<?= url()->route('cadastro.editar',['id'=>$dados->id]);?>" class="btn btn-primary" role="button">Editar</a> 
+            <a href="<?= url()->route('cadastro.delete',['id'=>$dados->id]);?>" class="btn btn-danger" role="button">Excluir</a></p>
+      </div>
     </div>
-</div>       
-
-<div class="panel panel-default">
-    <div class="panel-body">
-
-        <?php $this->render('common/logout'); ?><!--logout-->
-
-    </div>
-    <a href="<?= url()->route('pessoa.index') ?>" class="btn btn-primary">
-        Funcionario
-    </a>
-    
-    <a href="<?= url()->route('cadastro.index') ?>" class="btn btn-success">
-        Cadastrar
-    </a>
-    <a href="<?= url()->route('eventos.cadastrar', ['pessoa' => $pessoa->id]) ?>" class="btn btn-info">
-        Opção
-    </a>
-    
-    <a href="<?= url()->route('eventos.cadastrar', ['pessoa' => $pessoa->id]) ?>" class="btn btn-warning">
-        Opção
-    </a>
-    
+  </div><?php endforeach;?>
 </div>
 
-<?php if (session()->has('_sucesso')): ?>
-    <div class="alert alert-success" role="alert"><?= session()->getAndRemove('_sucesso'); ?></div>
-<?php endif; ?>
-
-<?php if (session()->has('_erro')): ?>
-    <div class="alert alert-danger" role="alert"><?= session()->getAndRemove('_erro'); ?></div>
-<?php endif; ?>
-
-<div class="agenda">
-    <div class="table-responsive">
-        <table class="table table-condensed table-bordered">
-            <thead>
-                <tr>
-                    <th>Nome</th>
-                    <th>Data</th>
-                    <th>Hora</th>
-                    <th>Evento</th>
-                </tr>
-            </thead>
-            <tbody>
-
-
-                <?php foreach ($eventos as $evento): ?>
-                    <tr>
-                        <?php foreach ($pessoas as $pessoa):?>
-                        <td class="agenda-events">
-                            <?= $pessoa->nome; ?>
-                        </td>
-                        
-                        <td class="agenda-date" class="active" rowspan="1">
-                            <div class="dayofmonth"><?= dt($evento->data)->getDayOfMonth(); ?></div>
-                            <div class="dayofweek"><?= dt($evento->data)->getDayOfWeek(); ?></div>
-                            <div class="shortdate text-muted"><?= dt($evento->data)->getYearAndMonthSpelledOut(); ?></div>
-                        </td>
-                        <td class="agenda-time">
-                            <?= $evento->hora_de; ?>
-
-                            <?php if ($evento->hora_ate): ?>
-                                às <?= $evento->hora_ate; ?>
-                            <?php endif; ?>
-                        </td>
-                        <td class="agenda-events">
-                            <?= $evento->descricao; ?>
-                        </td>
-                        
-                    </tr>
-                    <?php endforeach;?>
-                <?php endforeach; ?>
-
-            </tbody>
-        </table>
-    </div>
-
-
-</div>
 
 <?php $this->render('common/footer'); ?>
-
