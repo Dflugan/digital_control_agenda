@@ -95,9 +95,10 @@ class Db extends PDO
         return $sth->execute();
     }
 
-    public function delete($table, $where, $limit = 1)
+    public function delete($table, $id, $limit = 1)
     {
-        $sql = sprintf('DELETE FROM %s WHERE %s LIMIT %s', $table, $where, $limit);
+        $where = "id=$id";
+        $sql = sprintf('DELETE FROM %s WHERE %s LIMIT %s', $table, $where, $limit);        
         return $this->exec($sql);
     }
 }

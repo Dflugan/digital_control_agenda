@@ -13,6 +13,9 @@ class CadastroController extends Controller {
     public function __construct() {
         $this->imovel = new Imoveis;
     }
+    public function teste() {
+        $this->render('cadastro/teste');
+    }
 
     public function index() {
         $this->render('cadastro/index');

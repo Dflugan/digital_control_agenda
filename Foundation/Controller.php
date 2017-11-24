@@ -17,4 +17,16 @@ abstract class Controller
 
         return require $file;
     }
+    protected function renderXml($view, array $data = [])
+    {
+        extract($data);
+
+        $file = Container::get('app.view.path') . $view . '.xml';
+
+        if( ! file_exists($file)) {
+            throw new \Exception('O arquivo de visão não foi localizado.');
+        }
+
+        return require $file;
+    }
 }

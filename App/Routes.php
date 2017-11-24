@@ -28,6 +28,8 @@ return [
 
     'eventos.salvar'  => ['eventos', 'salvar'],
 
+    'cadastro.teste' => ['cadastro', 'teste'],
+    
     'cadastro.index' => ['cadastro', 'index'],
 
     'cadastro.salvar' => ['cadastro', 'salvar'],
@@ -64,7 +66,11 @@ return [
     
     'pessoa.editar' => ['pessoa', 'editar'],
     
-    'search.index' => ['search', 'index']
+    'search.index' => ['search', 'index'],
+    
+    'xml.index' => ['xml', 'index'],
+    
+    'xml.ler' => ['xml', 'ler']
 
 
 ];

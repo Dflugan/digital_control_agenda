@@ -1,0 +1,35 @@
+<?php
+$xml = "<?xml version='1.0' encoding='UTF-8'?>";//cabeçalho do arquivo
+       $xml .= "<grupoD>";
+ 
+       foreach ($imoveis as $dados){
+           $xml .= "<imovel>";
+           $xml .= "<id>$dados->id</id>";
+           $xml .= "<codigo>$dados->codigo</codigo>";
+           $xml .= "<titulo>$dados->titulo</titulo>";
+           $xml .= "<cep>$dados->cep</cep>";
+           $xml .= "<rua>$dados->rua</rua>";
+           $xml .= "<numero>$dados->numero</numero>";
+           $xml .= "<cidade>$dados->cidade</cidade>";
+           $xml .= "<estado>$dados->estado</estado>";
+           $xml .= "<bairro>$dados->bairro</bairro>";
+           $xml .= "<complemento>$dados->complemento</complemento>";
+           $xml .= "<preco>$dados->preco</preco>";
+           $xml .= "<forma>$dados->forma</forma>";
+           $xml .= "<area>$dados->area</area>";
+           $xml .= "<quarto>$dados->quarto</quarto>";
+           $xml .= "<suite>$dados->suite</suite>";
+           $xml .= "<banheiro>$dados->banheiro</banheiro>";
+           $xml .= "<sala>$dados->sala</sala>";
+           $xml .= "<garagem>$dados->garagem</garagem>";
+           $xml .= "<imagem>$dados->imagem</imagem>";
+           $xml .= "t</imovel>";
+       }
+       $xml .= "</grupoD>";
+ 
+       $ponteiro = fopen('../App/Views/bkp/backup.xml', 'w'); //cria um arquivo com o nome backup.xml
+       fwrite($ponteiro, $xml); // salva conteúdo da variável $xml dentro do arquivo backup.xml
+ 
+       $ponteiro = fclose($ponteiro); //fecha o arquivo
+ 
+?>
