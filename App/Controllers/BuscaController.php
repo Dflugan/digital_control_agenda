@@ -26,7 +26,7 @@ class BuscaController extends Controller {
                 'imoveis' => $imoveis
             ]);
         } else {
-            session()->put('_errosearch', 'Você digitou código inexistnte, tente novamente!!!');
+            session()->put('_errosearch', 'Código inválido, tente novamente!!!');
             return redirect()->route('menu.index');
         }
     }
