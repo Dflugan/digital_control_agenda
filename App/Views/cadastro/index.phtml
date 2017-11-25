@@ -1,288 +1,202 @@
 <?php $this->render('common/header'); ?>
 <?php $this->render('common/session'); ?>
-<head><title>Cadastro - Moveis</title>
-<head>
-    <!-- Adicionando Javascript -->
-    <script type="text/javascript" >
-    
-    function limpa_formulário_cep() {
-            //Limpa valores do formulário de cep.
-            document.getElementById('rua').value=("");
-            document.getElementById('bairro').value=("");
-            document.getElementById('cidade').value=("");
-            document.getElementById('uf').value=("");
-            document.getElementById('ibge').value=("");
-    }
+<head><title>Cadastro - Moveis</title></head>
 
-    function meu_callback(conteudo) {
-        if (!("erro" in conteudo)) {
-            //Atualiza os campos com os valores.
-            document.getElementById('rua').value=(conteudo.logradouro);
-            document.getElementById('bairro').value=(conteudo.bairro);
-            document.getElementById('cidade').value=(conteudo.localidade);
-            document.getElementById('uf').value=(conteudo.uf);
-            document.getElementById('ibge').value=(conteudo.ibge);
-        } //end if.
-        else {
-            //CEP não Encontrado.
-            limpa_formulário_cep();
-            alert("CEP não encontrado.");
-        }
-    }
-        
-    function pesquisacep(valor) {
+<div class="page-header">
+    <?php $this->render('common/login'); ?><!--logo-->
+    <?php $this->render('common/logout'); ?><!--logout-->
+</div>
+<div class="container">
+    <?php $this->render('common/navbar'); ?><!--navbar-->
 
-        //Nova variável "cep" somente com dígitos.
-        var cep = valor.replace(/\D/g, '');
-
-        //Verifica se campo cep possui valor informado.
-        if (cep != "") {
-
-            //Expressão regular para validar o CEP.
-            var validacep = /^[0-9]{8}$/;
-
-            //Valida o formato do CEP.
-            if(validacep.test(cep)) {
-
-                //Preenche os campos com "..." enquanto consulta webservice.
-                document.getElementById('rua').value="...";
-                document.getElementById('bairro').value="...";
-                document.getElementById('cidade').value="...";
-                document.getElementById('uf').value="...";
-                document.getElementById('ibge').value="...";
-
-                //Cria um elemento javascript.
-                var script = document.createElement('script');
-
-                //Sincroniza com o callback.
-                script.src = '//viacep.com.br/ws/'+ cep + '/json/?callback=meu_callback';
-
-                //Insere script no documento e carrega o conteúdo.
-                document.body.appendChild(script);
-
-            } //end if.
-            else {
-                //cep é inválido.
-                limpa_formulário_cep();
-                alert("Formato de CEP inválido.");
-            }
-        } //end if.
-        else {
-            //cep sem valor, limpa formulário.
-            limpa_formulário_cep();
-        }
-    };
-
-    </script>
-    </head>
-
-    <div class="page-header">
-        <?php $this->render('common/login'); ?><!--logo-->
-        <?php $this->render('common/logout'); ?><!--logout-->
-    </div>
-    <div class="container">
-        <?php $this->render('common/navbar'); ?><!--navbar-->
-<!--        <script type="text/javascript">
-            $(document).ready(function()){
-                $("input[name='cep']").blur(function()){
-                    var $rua = $("input[name='rua']");
-                    $.getJSON(,{
-                        cep: $( this ).val()
-                    },function( json )){
-                        $rua.val( json.rua );
-                    };
-                };
-            };
-        </script>-->
-
-        <form class="form-horizontal" action="<?= url()->route('cadastro.cadastroImoveis'); ?>" method="post" enctype="multipart/form-data">
-            <div class="form-group">
-                    <label for="codigo" class="col-sm-2 control-label">Código</label>
-                    <div class="col-sm-2">
-                        <input type="text"  name="codigo" class="form-control" id="codigo" placeholder="Código do Imovel" maxlength="10" pattern="[0-9]+$" required="required" title="Preencha o campo valores numéricos.">
-                    </div>
+    <form class="form-horizontal" action="<?= url()->route('cadastro.cadastroImoveis'); ?>" method="post" enctype="multipart/form-data">
+        <div class="form-group">
+            <label for="codigo" class="col-sm-2 control-label">Código</label>
+            <div class="col-sm-2">
+                <input type="text"  name="codigo" class="form-control" id="codigo" placeholder="Código do Imovel" maxlength="10" pattern="[0-9]+$" required="required" title="Preencha o campo valores numéricos.">
             </div>
-            <div class="form-group">
-                    <label for="titulo" class="col-sm-2 control-label">Titulo</label>
-                    <div class="col-sm-3">
-                        <input type="text" name="titulo" class="form-control" id="nome" placeholder="Titulo do Imóvel" maxlength="25" required="required" pattern="[A-Za-z\s]+$" title="Prencher o campo somente com texto">
-                    </div>
-                    <label for="tipo" class="col-sm-1 control-label">Tipo</label>
-                    <div class="col-sm-2">
-                        <div class="col-sm-1">
-                            <select class="selectpicker show-tick" name="tipo">
-                                <option value="Casa">Casa</option>
-                                <option value="Apartamento">Apartamento</option>
-                                <option value="Sobrado">Sobrado</option>
-                                <option value="Chacara">Chacara</option>
-                                <option value="Kitnet">Kitnet</option>
-                            </select>
-                        </div>
-                    </div>
+        </div>
+        <div class="form-group">
+            <label for="titulo" class="col-sm-2 control-label">Titulo</label>
+            <div class="col-sm-3">
+                <input type="text" name="titulo" class="form-control" id="nome" placeholder="Titulo do Imóvel" maxlength="25" required="required" pattern="[A-Za-z\s]+$" title="Prencher o campo somente com texto">
             </div>
-            
-            <div class="form-group">
-                    <label class="col-sm-2 control-label">Cep:</label>
-                    <div class="col-sm-2">
-                        <input class="form-control" placeholder="Cep" name="cep" type="text" id="cep" size="10" required="required" maxlength="9" pattern="[0-9]+$" title="Preencha o campo valores numéricos" onblur="pesquisacep(this.value);" />
-                    </div>
-                    <label for="ruaa" class="col-sm-1 control-label">Rua</label>
-                    <div class="col-sm-4">
-                            <input name="rua" type="text" id="rua" size="60" class="form-control" placeholder="Rua" required="required" maxlength="50" pattern="[A-Za-zã-ú\s]+$" title="Preencha o campo somente letras">
-                    </div>
-                    <label for="numero" class="col-sm-1 control-label">Numero</label>
-                    <div class="col-sm-2">
-                            <input type="text" name="numero" class="form-control" id="numero" placeholder="Numero" required="required" maxlength="5" pattern="[0-9\s]+$" title="Preencha o campo valores numéricos">
-                    </div>
+            <label for="tipo" class="col-sm-1 control-label">Tipo</label>
+            <div class="col-sm-2">
+                <div class="col-sm-1">
+                    <select class="selectpicker show-tick" name="tipo">
+                        <option value="Casa">Casa</option>
+                        <option value="Apartamento">Apartamento</option>
+                        <option value="Sobrado">Sobrado</option>
+                        <option value="Chacara">Chacara</option>
+                        <option value="Kitnet">Kitnet</option>
+                    </select>
+                </div>
             </div>
-            <div class="form-group">
-                    <label for="cidade" class="col-sm-2 control-label">Cidade</label>
-                    <div class="col-sm-2">
-                            <input name="cidade" type="text" id="cidade" size="40" class="form-control" placeholder="Cidade" required="required" maxlength="50" pattern="[A-Za-zã-ú\s]+$" title="Preencha o campo somente letras">
-                    </div>
-                    <label for="uf" class="col-sm-1 control-label">Estado</label>
-                    <div class="col-sm-1">
-                            <input name="uf" type="text" id="uf" size="60" class="form-control" placeholder="Estado" required="required" maxlength="2" pattern="[A-Za-zã-ú\s]+$" title="Preencha o campo somente letras">
-                    </div>
-                    
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Cep:</label>
+            <div class="col-sm-2">
+                <input class="form-control" placeholder="Cep" name="cep" type="text" id="cep" size="10" required="required" maxlength="9" pattern="[0-9]+$" title="Preencha o campo valores numéricos" onblur="pesquisacep(this.value);" />
             </div>
-            <div class="form-group">
-                <label for="bairro" class="col-sm-2 control-label">Bairro</label>
-                    <div class="col-sm-4">
-                            <input name="bairro" type="text" id="bairro" size="40" class="form-control" placeholder="Bairro" required="required" maxlength="20" pattern="[A-Za-zã-ú\s]+$" title="Preencha o campo somente letras">
-                    </div>
-                    <label for="complemente" class="col-sm-1 control-label">Complemento</label>
-                    <div class="col-sm-4">
-                            <input type="text" value="" name="complemento" class="form-control" id="quantidade" placeholder="Complemento" required="required" maxlength="25" pattern="[A-Za-zã-ú\s]+$" title="Preencha o campo somente letras">
-                    </div>
-            </div>    
-            <div class="form-group">
-                    <label for="preco" class="col-sm-2 control-label">Preço</label>
-                    <div class="col-sm-2">
-                            <input type="text" value="" name="preco" class="form-control" id="foto" placeholder="Preço" required="required" maxlength="50" pattern="[0-9]+$" title="Preencha o campo somente valores numéricos ">
-                    </div>
-                    <div class="col-sm-2">
-                        <select class="selectpicker show-tick" name="forma">
-                            <option value="venda">Venda</option>
-                            <option value="Aluguel">Aluguel</option>
-                            <option value="Temporada">Temporada</option>
-                          </select>
-                    </div>
+            <label for="ruaa" class="col-sm-1 control-label">Rua</label>
+            <div class="col-sm-4">
+                <input name="rua" type="text" id="rua" size="60" class="form-control" placeholder="Rua" required="required" maxlength="50" pattern="[A-Za-zã-ú\s]+$" title="Preencha o campo somente letras">
             </div>
-             <div class="form-group">
-                    <label for="area" class="col-sm-2 control-label">Area</label>
-                    <div class="col-sm-2">
-                        <input type="text" value="" name="area" class="form-control" id="foto" placeholder="Área Mt²" required="required" maxlength="4" pattern="[0-9]+$" title="Preencha o campo valores numéricos" >
-                    </div>
+            <label for="numero" class="col-sm-1 control-label">Numero</label>
+            <div class="col-sm-2">
+                <input type="text" name="numero" class="form-control" id="numero" placeholder="Numero" required="required" maxlength="5" pattern="[0-9\s]+$" title="Preencha o campo valores numéricos">
             </div>
-            <div class="form-group">
-                    <label for="quarto" class="col-sm-2 control-label">Quarto</label>
-                    <div class="col-sm-1">
-                        <select name="quarto">
-                            <option value="0">0</option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                            <option value="6">6</option>
-                            <option value="7">7</option>
-                            <option value="8">8</option>
-                            <option value="9">9</option>
-                            <option value="10">10</option>
-                         </select>
-                    </div>
-                    <label for="suite" class="col-sm-1 control-label">Suite</label>
-                    <div class="col-sm-1">
-                        <select name="suite">
-                            <option value="0">0</option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                            <option value="6">6</option>
-                            <option value="7">7</option>
-                            <option value="8">8</option>
-                            <option value="9">9</option>
-                            <option value="10">10</option>
-                          </select>
-                    </div>
-                    <label for="banheiro" class="col-sm-1 control-label">Banheiro</label>
-                    <div class="col-sm-1">
-                        <select name="banheiro">
-                            <option value="0">0</option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                            <option value="6">6</option>
-                            <option value="7">7</option>
-                            <option value="8">8</option>
-                            <option value="9">9</option>
-                            <option value="10">10</option>
-                          </select>
-                    </div>
-                    <label for="sala" class="col-sm-1 control-label">Sala</label>
-                    <div class="col-sm-1">
-                        <select name="sala">
-                            <option value="0">0</option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                            <option value="6">6</option>
-                            <option value="7">7</option>
-                            <option value="8">8</option>
-                            <option value="9">9</option>
-                            <option value="10">10</option>
-                          </select>
-                    </div>
-                    <label for="garagem" class="col-sm-1 control-label">Garagem</label>
-                    <div class="col-sm-1">
-                        <select name="garagem">
-                            <option value="0">0</option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                            <option value="6">6</option>
-                            <option value="7">7</option>
-                            <option value="8">8</option>
-                            <option value="9">9</option>
-                            <option value="10">10</option>
-                          </select>
-                    </div>
+        </div>
+        <div class="form-group">
+            <label for="cidade" class="col-sm-2 control-label">Cidade</label>
+            <div class="col-sm-2">
+                <input name="cidade" type="text" id="cidade" size="40" class="form-control" placeholder="Cidade" required="required" maxlength="50" pattern="[A-Za-zã-ú\s]+$" title="Preencha o campo somente letras">
             </div>
-            <div class="form-group">
-                    <label for="imagem" class="col-sm-2 control-label">Imagem</label>
-                    <div class="col-sm-4">
-                        <input type="file" value="" name="arquivo" class="form-control" id="imagem" accept="image/*" required="required">
-                    </div>
-            </div>
-            
-            <label class="col-sm-2 control-label">IBGE:</label>
+            <label for="uf" class="col-sm-1 control-label">Estado</label>
             <div class="col-sm-1">
+                <input name="uf" type="text" id="uf" size="60" class="form-control" placeholder="Estado" required="required" maxlength="2" pattern="[A-Za-zã-ú\s]+$" title="Preencha o campo somente letras">
+            </div>
+
+        </div>
+        <div class="form-group">
+            <label for="bairro" class="col-sm-2 control-label">Bairro</label>
+            <div class="col-sm-4">
+                <input name="bairro" type="text" id="bairro" size="40" class="form-control" placeholder="Bairro" required="required" maxlength="20" pattern="[A-Za-zã-ú\s]+$" title="Preencha o campo somente letras">
+            </div>
+            <label for="complemente" class="col-sm-1 control-label">Complemento</label>
+            <div class="col-sm-4">
+                <input type="text" value="" name="complemento" class="form-control" id="quantidade" placeholder="Complemento" required="required" maxlength="25" pattern="[A-Za-zã-ú\s]+$" title="Preencha o campo somente letras">
+            </div>
+        </div>    
+        <div class="form-group">
+            <label for="preco" class="col-sm-2 control-label">Preço</label>
+            <div class="col-sm-2">
+                <input type="text" value="" name="preco" class="form-control" id="foto" placeholder="Preço" required="required" maxlength="50" pattern="[0-9]+$" title="Preencha o campo somente valores numéricos ">
+            </div>
+            <div class="col-sm-2">
+                <select class="selectpicker show-tick" name="forma">
+                    <option value="venda">Venda</option>
+                    <option value="Aluguel">Aluguel</option>
+                    <option value="Temporada">Temporada</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="area" class="col-sm-2 control-label">Area</label>
+            <div class="col-sm-2">
+                <input type="text" value="" name="area" class="form-control" id="foto" placeholder="Área Mt²" required="required" maxlength="4" pattern="[0-9]+$" title="Preencha o campo valores numéricos" >
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="quarto" class="col-sm-2 control-label">Quarto</label>
+            <div class="col-sm-1">
+                <select name="quarto">
+                    <option value="0">0</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                </select>
+            </div>
+            <label for="suite" class="col-sm-1 control-label">Suite</label>
+            <div class="col-sm-1">
+                <select name="suite">
+                    <option value="0">0</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                </select>
+            </div>
+            <label for="banheiro" class="col-sm-1 control-label">Banheiro</label>
+            <div class="col-sm-1">
+                <select name="banheiro">
+                    <option value="0">0</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                </select>
+            </div>
+            <label for="sala" class="col-sm-1 control-label">Sala</label>
+            <div class="col-sm-1">
+                <select name="sala">
+                    <option value="0">0</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                </select>
+            </div>
+            <label for="garagem" class="col-sm-1 control-label">Garagem</label>
+            <div class="col-sm-1">
+                <select name="garagem">
+                    <option value="0">0</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="imagem" class="col-sm-2 control-label">Imagem</label>
+            <div class="col-sm-4">
+                <input type="file" value="" name="arquivo" class="form-control" id="imagem" accept="image/*" required="required">
+            </div>
+        </div>
+
+        <label class="col-sm-2 control-label">IBGE:</label>
+        <div class="col-sm-1">
             <input class="form-control" name="ibge" type="text" id="ibge" size="8" /><br /><br />
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit" class="btn btn-success">Cadastrar</button>
             </div>
-            <div class="form-group">
-                    <div class="col-sm-offset-2 col-sm-10">
-                            <button type="submit" class="btn btn-success">Cadastrar</button>
-                    </div>
-            </div>
-               
-                <?php if (session()->has('_sucesso')): ?>
-                    <div class="alert alert-success" role="alert"><?= session()->getAndRemove('_sucesso'); ?></div>
-                <?php endif; ?>
-                <?php if (session()->has('_erro')): ?>
-                    <div class="alert alert-danger" role="alert"><?= session()->getAndRemove('_erro'); ?></div>
-                <?php endif; ?>
-            
-        </form>
-        
-    </div>
+        </div>
+
+        <?php if (session()->has('_sucesso')): ?>
+            <div class="alert alert-success" role="alert"><?= session()->getAndRemove('_sucesso'); ?></div>
+        <?php endif; ?>
+        <?php if (session()->has('_erro')): ?>
+            <div class="alert alert-danger" role="alert"><?= session()->getAndRemove('_erro'); ?></div>
+        <?php endif; ?>
+
+    </form>
+
+</div>
 
 <?php $this->render('common/footer'); ?>
