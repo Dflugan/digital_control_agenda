@@ -1,6 +1,7 @@
 
 System Admin Grupo Digital
 
+servidor local:
 Executar projeto arquivo /public/index.php
 
 Endereço projeto - http://grupodigital.tecnologia.ws/
