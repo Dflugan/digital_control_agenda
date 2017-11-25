@@ -99,13 +99,13 @@
             <div class="form-group">
                     <label for="codigo" class="col-sm-2 control-label">Código</label>
                     <div class="col-sm-2">
-                            <input type="text" value="" name="codigo" class="form-control" id="codigo" placeholder="Código do Imovel">
+                        <input type="text"  name="codigo" class="form-control" id="codigo" placeholder="Código do Imovel" maxlength="10" pattern="[0-9]+$" required="required" title="Preencha o campo valores numéricos.">
                     </div>
             </div>
             <div class="form-group">
                     <label for="titulo" class="col-sm-2 control-label">Titulo</label>
                     <div class="col-sm-3">
-                            <input type="text" value="" name="titulo" class="form-control" id="nome" placeholder="Titulo do Imóvel">
+                        <input type="text" name="titulo" class="form-control" id="nome" placeholder="Titulo do Imóvel" maxlength="25" required="required" pattern="[A-Za-z\s]+$" title="Prencher o campo somente com texto">
                     </div>
                     <label for="tipo" class="col-sm-1 control-label">Tipo</label>
                     <div class="col-sm-2">
@@ -124,74 +124,42 @@
             <div class="form-group">
                     <label class="col-sm-2 control-label">Cep:</label>
                     <div class="col-sm-2">
-                        <input class="form-control" placeholder="Cep" name="cep" type="text" id="cep" value="" size="10" maxlength="9"
-                    onblur="pesquisacep(this.value);" />
+                        <input class="form-control" placeholder="Cep" name="cep" type="text" id="cep" size="10" required="required" maxlength="9" pattern="[0-9]+$" title="Preencha o campo valores numéricos" onblur="pesquisacep(this.value);" />
                     </div>
                     <label for="ruaa" class="col-sm-1 control-label">Rua</label>
                     <div class="col-sm-4">
-                            <input name="rua" type="text" id="rua" size="60" class="form-control" placeholder="Rua">
+                            <input name="rua" type="text" id="rua" size="60" class="form-control" placeholder="Rua" required="required" maxlength="50" pattern="[A-Za-zã-ú\s]+$" title="Preencha o campo somente letras">
                     </div>
                     <label for="numero" class="col-sm-1 control-label">Numero</label>
                     <div class="col-sm-2">
-                            <input type="text" value="" name="numero" class="form-control" id="numero" placeholder="Numero">
+                            <input type="text" name="numero" class="form-control" id="numero" placeholder="Numero" required="required" maxlength="5" pattern="[0-9\s]+$" title="Preencha o campo valores numéricos">
                     </div>
             </div>
             <div class="form-group">
                     <label for="cidade" class="col-sm-2 control-label">Cidade</label>
                     <div class="col-sm-2">
-                            <input name="cidade" type="text" id="cidade" size="40" class="form-control" placeholder="Cidade">
+                            <input name="cidade" type="text" id="cidade" size="40" class="form-control" placeholder="Cidade" required="required" maxlength="50" pattern="[A-Za-zã-ú\s]+$" title="Preencha o campo somente letras">
                     </div>
                     <label for="uf" class="col-sm-1 control-label">Estado</label>
                     <div class="col-sm-1">
-                            <input name="uf" type="text" id="uf" size="60" class="form-control" placeholder="Estado">
-                    </div><!--                    
-                    <label for="estado" class="col-sm-1 control-label" name="uf" type="text" id="uf" size="2">Estado</label>
-                    <div class="col-sm-1">
-                        <select class="selectpicker" data-live-search="true" name="uf" type="text" id="uf" size="2">
-                                <option  data-tokens="AL" value="AL">AL</option>
-                                <option  data-tokens="AM" value="AM">AM</option>
-                                <option  data-tokens="AP" value="AP">AP</option>
-                                <option  data-tokens="BA" value="BA">BA</option>
-                                <option  data-tokens="CE" value="CE">CE</option>
-                                <option  data-tokens="DF" value="DF">DF</option>
-                                <option  data-tokens="ES" value="ES">ES</option>
-                                <option  data-tokens="GO" value="GO">GO</option>
-                                <option  data-tokens="MA" value="MA">MA</option>
-                                <option  data-tokens="MG" value="MG">MG</option>
-                                <option  data-tokens="MS" value="MS">MS</option>
-                                <option  data-tokens="MT" value="MT">MT</option>
-                                <option  data-tokens="PA" value="PA">PA</option>
-                                <option  data-tokens="PB" value="PB">PB</option>
-                                <option  data-tokens="PE" value="PE">PE</option>
-                                <option  data-tokens="PI" value="PI">PI</option>
-                                <option  data-tokens="PR" value="PR">PR</option>
-                                <option  data-tokens="RJ" value="RJ">RJ</option>
-                                <option  data-tokens="RN" value="RN">RN</option>
-                                <option  data-tokens="RO" value="RO">RO</option>
-                                <option  data-tokens="RR" value="RR">RR</option>
-                                <option  data-tokens="RS" value="RS">RS</option>
-                                <option  data-tokens="SC" value="SC">SC</option>
-                                <option  data-tokens="SE" value="SE">SE</option>
-                                <option  data-tokens="SP" value="SP">SP</option>
-                                <option  data-tokens="TO" value="TO">TO</option>
-                            </select>
-                    </div>-->
+                            <input name="uf" type="text" id="uf" size="60" class="form-control" placeholder="Estado" required="required" maxlength="2" pattern="[A-Za-zã-ú\s]+$" title="Preencha o campo somente letras">
+                    </div>
                     
             </div>
             <div class="form-group">
                 <label for="bairro" class="col-sm-2 control-label">Bairro</label>
                     <div class="col-sm-4">
-                            <input name="bairro" type="text" id="bairro" size="40" class="form-control" placeholder="Bairro">
+                            <input name="bairro" type="text" id="bairro" size="40" class="form-control" placeholder="Bairro" required="required" maxlength="20" pattern="[A-Za-zã-ú\s]+$" title="Preencha o campo somente letras">
                     </div>
                     <label for="complemente" class="col-sm-1 control-label">Complemento</label>
                     <div class="col-sm-4">
-                            <input type="text" value="" name="complemento" class="form-control" id="quantidade" placeholder="Complemento">
+                            <input type="text" value="" name="complemento" class="form-control" id="quantidade" placeholder="Complemento" required="required" maxlength="25" pattern="[A-Za-zã-ú\s]+$" title="Preencha o campo somente letras">
                     </div>
             </div>    
             <div class="form-group">
                     <label for="preco" class="col-sm-2 control-label">Preço</label>
                     <div class="col-sm-2">
-                            <input type="text" value="" name="preco" class="form-control" id="foto" placeholder="Preço">
+                            <input type="text" value="" name="preco" class="form-control" id="foto" placeholder="Preço" required="required" maxlength="50" pattern="[0-9]+$" title="Preencha o campo somente valores numéricos ">
                     </div>
                     <div class="col-sm-2">
                         <select class="selectpicker show-tick" name="forma">
@@ -204,7 +172,7 @@
              <div class="form-group">
                     <label for="area" class="col-sm-2 control-label">Area</label>
                     <div class="col-sm-2">
-                        <input type="text" value="" name="area" class="form-control" id="foto" placeholder="Área Mt²">
+                        <input type="text" value="" name="area" class="form-control" id="foto" placeholder="Área Mt²" required="required" maxlength="4" pattern="[0-9]+$" title="Preencha o campo valores numéricos" >
                     </div>
             </div>
             <div class="form-group">
@@ -292,7 +260,7 @@
             <div class="form-group">
                     <label for="imagem" class="col-sm-2 control-label">Imagem</label>
                     <div class="col-sm-4">
-                        <input type="file" value="" name="arquivo" class="form-control" id="imagem">
+                        <input type="file" value="" name="arquivo" class="form-control" id="imagem" accept="image/*" required="required">
                     </div>
             </div>
             

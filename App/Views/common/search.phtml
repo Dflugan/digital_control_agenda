@@ -1,6 +1,6 @@
 <form action="<?= url()->route('busca.search')?>" method="post">
                 <div class="input-group h2">
-                    <input name="search" class="form-control" id="search" type="text" placeholder="Digite o código">
+                    <input name="search" class="form-control" id="search" type="text" placeholder="Digite o código" maxlength="10" pattern="[0-9]+$" required="required" title="Preencha o campo valores numéricos.">
                     <span class="input-group-btn">
                         <button type="submit" class="btn btn-primary">
                             <span class="glyphicon glyphicon-search"></span>
@@ -8,3 +8,4 @@
                     </span>
                 </div>
             </form>
+

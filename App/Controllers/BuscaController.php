@@ -1,28 +1,34 @@
 <?php
+
 namespace App\Controllers;
 
 use Foundation\Controller;
 use Foundation\Database;
 use App\Models\Imoveis;
 
+class BuscaController extends Controller {
 
-class BuscaController extends Controller
-
-{
     protected $imoveis;
+
     public function __construct() {
         $this->imoveis = new Imoveis;
     }
 
-    public function index(){
+    public function index() {
         $this->render('search/index');
     }
-    
-    public function search(){
+
+    public function search() {
         $search = input()->get('search');
         $imoveis = $this->imoveis->search($search);
-        $this->render('index/index',[
-            'imoveis'=>$imoveis
-        ]);
+        if ($imoveis) {
+            $this->render('index/index', [
+                'imoveis' => $imoveis
+            ]);
+        } else {
+            session()->put('_errosearch', 'Você digitou código inexistnte, tente novamente!!!');
+            return redirect()->route('menu.index');
+        }
     }
+
 }

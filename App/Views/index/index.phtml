@@ -9,10 +9,11 @@
         <div class="col-md-6">
             <?php $this->render('common/search'); ?>
         </div>
-
-    </div> <!-- /#top -->
-
-    <?php $this->render('common/logout'); ?><!--logout-->
+    </div> 
+    <?php $this->render('common/logout'); ?>
+     <?php if (session()->has('_errosearch')): ?>
+        <div class="alert alert-danger" role="alert"><?= session()->getAndRemove('_errosearch'); ?></div>
+    <?php endif; ?>
     <?php if (session()->has('_erro')): ?>
         <div class="alert alert-danger" role="alert"><?= session()->getAndRemove('_erro'); ?></div>
     <?php endif; ?>
