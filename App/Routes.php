@@ -16,11 +16,13 @@ return [
 
     'index'     => ['index', 'index'],
     
-    'index.teste'     => ['index', 'teste'],
+    'index.lista'     => ['index', 'lista'],
     
     'busca.index'     => ['busca', 'index'],
     
     'busca.search'     => ['busca', 'search'],
+    
+    'busca.search_lista'     => ['busca', 'search_lista'],
 
     'eventos.index'  => ['eventos', 'index'],
 
@@ -43,6 +45,8 @@ return [
     'cadastro.login' => ['cadastro', 'login'],
     
     'cadastro.cadastroImoveis' => ['cadastro', 'cadastroImoveis'],
+    
+    'cadastro.delete_lista' => ['cadastro', 'delete_lista'],
 
     'login.logar' => ['login', 'logar'],
 
@@ -70,7 +74,9 @@ return [
     
     'xml.index' => ['xml', 'index'],
     
-    'xml.ler' => ['xml', 'ler']
+    'xml.ler' => ['xml', 'ler'],
+    
+    'lista.index' => ['lista', 'index']
 
 
 ];

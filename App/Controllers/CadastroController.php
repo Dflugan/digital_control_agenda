@@ -195,5 +195,10 @@ class CadastroController extends Controller {
             return redirect()->route('menu.index');
         }
     }
+    
+    public function delete_lista(){
+        $this->delete();
+        return redirect()->route('lista.index');
+    }
 
 }

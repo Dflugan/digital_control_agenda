@@ -30,5 +30,19 @@ class BuscaController extends Controller {
             return redirect()->route('menu.index');
         }
     }
+    
+    public function search_lista(){
+        $search = input()->get('search');
+        $imoveis = $this->imoveis->search($search);
+        if ($imoveis) {
+            $this->render('index/lista', [
+                'imoveis' => $imoveis
+            ]);
+        } else {
+            session()->put('_errosearch', 'Código inválido, tente novamente!!!');
+            return redirect()->route('lista.index');
+        }
+        
+    }
 
 }
