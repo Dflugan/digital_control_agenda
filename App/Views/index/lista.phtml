@@ -33,26 +33,26 @@
                 <tr>
                     <th width="5%">Cód</th>
                     <th width="13%">Titulo</th>
-                    <th width="10%">Tipo</th>
-                    <th width="15%">Rua</th>
+                    <th width="11%">Tipo</th>
+                    <th width="20%">Rua</th>
                     <th width="10%">Cidade</th>
                     <th width="10%">Bairro</th>
                     <th width="5%">Uf</th>
                     <th width="5%">Status</th>
-                    <th width="5%">Preço</th>
-                    <th width="5%">Imagem</th>
-                    <th width="7%">Ação</th>
+                    <th width="10%">Preço</th>
+                    <th width="2%">Imagem</th>
+                    <th width="8%">Ação</th>
                 </tr>
                 <tr>
                     <td><?=$dados->codigo;?></td>
                     <td><?=$dados->titulo;?></td>
                     <td><?=$dados->tipo;?></td>
-                    <td><?=$dados->rua;?></td>
+                    <td><?=$dados->rua;?>, <?=$dados->numero;?></td>
                     <td><?=$dados->cidade;?></td>
                     <td><?=$dados->bairro;?></td>
                     <td><?=$dados->estado;?></td>
                     <td><?=$dados->forma;?></td>
-                    <td><?=$dados->preco;?></td>
+                    <td>R$ <?=$dados->preco;?></td>
                     
                     <td class="text-center">
                         <img src="../imagens/produtos/<?= $dados->id ?>/<?= $dados->imagem?>" alt="<?=$dados->imagem?>" width="40" height="40">

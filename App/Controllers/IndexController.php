@@ -12,12 +12,6 @@ class IndexController extends Controller
         return $this->render('login/index');
     }
     
-    public function teste()
-    {
-        
-        return $this->render('pessoa/teste');
-    }
-    
     public function login(){
         return $this->render('common/login');
     }

@@ -26,6 +26,23 @@ $xml = "<?xml version='1.0' encoding='UTF-8'?>";//cabeçalho do arquivo
            $xml .= "t</imovel>";
        }
        $xml .= "</grupoD>";
+       echo $xml;exit;
+       
+       // Definimos o novo nome do arquivo
+        $novoNome = 'imoveis.xml';
+        // Configuramos os headers que serão enviados para o browser
+        header('Content-Description: PHP Generated Data');
+        header('Content-Type: application/xml');
+        
+        header('Content-Disposition: attachment; filename="' . $novoNome . '"');
+        header('Expires: 0');
+        header('Content-Description: File Transfer');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Pragma: no-cache');
+        
+        
+// Envia o arquivo para o cliente
+        return readfile($aquivoNome);
  
        $ponteiro = fopen('../App/Views/bkp/backup.xml', 'w'); //cria um arquivo com o nome backup.xml
        fwrite($ponteiro, $xml); // salva conteúdo da variável $xml dentro do arquivo backup.xml

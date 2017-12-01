@@ -9,10 +9,10 @@ class XmlController extends Controller {
 
     public function index() {
         $imoveis = (new Imoveis)->getAll();
-        $this->render('xml/index', [
+        return $this->render('xml/index', [
             'imoveis' => $imoveis
         ]);
-        return $xml = $this->renderXml('bkp/backup');
+         
     }
 
 //    public function backup() {

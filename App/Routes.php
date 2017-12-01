@@ -18,6 +18,8 @@ return [
     
     'index.lista'     => ['index', 'lista'],
     
+    'index.cont'     => ['index', 'cont'],
+    
     'busca.index'     => ['busca', 'index'],
     
     'busca.search'     => ['busca', 'search'],

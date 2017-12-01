@@ -1,13 +1,13 @@
 <?php $this->render('common/header'); ?>
 <?php $this->render('common/session'); ?>
-<head><title>Cadastro - Moveis</title></head>
+<head><title>Editar Cadastro - IMoveis</title></head>
 
 <div class="page-header">
     <?php $this->render('common/login'); ?><!--logo-->
     <?php $this->render('common/logout'); ?><!--logout-->
 </div>
 <div class="container">
-    <?php $this->render('common/navbar'); ?>
+    <?php $this->render('common/navbar'); ?>    
     <form class="form-horizontal" action="<?= url()->route('cadastro.editarCadastro', ['id' => $imoveis->id, 'imagem' => $imoveis->imagem]); ?>" method="post" enctype="multipart/form-data">
         <div class="form-group">
 
